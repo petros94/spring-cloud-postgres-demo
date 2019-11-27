@@ -30,23 +30,31 @@ services:
       - CONFIGSERVER_HOST=configserver
     depends_on:
       - eureka
-  frontend:
-    build: frontend/.
-    image: marcopaga/cloud-frontend:1
+#  frontend:
+#    build: frontend/.
+#    image: marcopaga/cloud-frontend:1
+#    environment:
+#      - EUREKA_HOST=eureka
+#      - ZIPKIN_HOST=zipkin
+#      - CONFIGSERVER_HOST=configserver
+#    depends_on:
+#      - eureka
+#      - zipkin
+  hellodocker:
+    build: hellodocker/.
+    image: cognity/hellodocker:1
     environment:
       - EUREKA_HOST=eureka
-      - ZIPKIN_HOST=zipkin
       - CONFIGSERVER_HOST=configserver
     depends_on:
       - eureka
-      - zipkin
-  backend:
-    build: backend/.
-    image: marcopaga/cloud-backend:2
-    environment:
-      - EUREKA_HOST=eureka
-      - ZIPKIN_HOST=zipkin
-      - CONFIGSERVER_HOST=configserver
-    depends_on:
-      - eureka
-      - zipkin
+#  backend:
+#    build: backend/.
+#    image: marcopaga/cloud-backend:2
+#    environment:
+#      - EUREKA_HOST=eureka
+#      - ZIPKIN_HOST=zipkin
+#      - CONFIGSERVER_HOST=configserver
+#    depends_on:
+#      - eureka
+#      - zipkin
