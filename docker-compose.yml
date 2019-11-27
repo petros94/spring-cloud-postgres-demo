@@ -7,12 +7,12 @@ services:
       - "9411:9411"
   configserver:
     build: configserver/.
-    image: marcopaga/cloud-configserver:1
+    image: spring-cloud-postgres-demo/cloud-configserver:1
     ports:
       - "8888:8888"
   eureka:
     build: eureka/.
-    image: marcopaga/cloud-eureka:1
+    image: spring-cloud-postgres-demo/cloud-eureka:1
     ports:
       - "8761:8761"
     environment:
@@ -21,7 +21,7 @@ services:
       - configserver
   edgeservice:
     build: edgeservice/.
-    image: marcopaga/cloud-edgeservice:1
+    image: spring-cloud-postgres-demo/cloud-edgeservice:1
     ports:
       - "8080:8080"
     environment:
@@ -30,31 +30,11 @@ services:
       - CONFIGSERVER_HOST=configserver
     depends_on:
       - eureka
-#  frontend:
-#    build: frontend/.
-#    image: marcopaga/cloud-frontend:1
-#    environment:
-#      - EUREKA_HOST=eureka
-#      - ZIPKIN_HOST=zipkin
-#      - CONFIGSERVER_HOST=configserver
-#    depends_on:
-#      - eureka
-#      - zipkin
-  hellodocker:
-    build: hellodocker/.
-    image: cognity/hellodocker:1
+  userservice:
+    build: userservice/.
+    image: spring-cloud-postgres-demo/hellodocker:1
     environment:
       - EUREKA_HOST=eureka
       - CONFIGSERVER_HOST=configserver
     depends_on:
       - eureka
-#  backend:
-#    build: backend/.
-#    image: marcopaga/cloud-backend:2
-#    environment:
-#      - EUREKA_HOST=eureka
-#      - ZIPKIN_HOST=zipkin
-#      - CONFIGSERVER_HOST=configserver
-#    depends_on:
-#      - eureka
-#      - zipkin
