@@ -4,5 +4,11 @@ spring:
   cloud:
     config:
       uri: http://${configserver.host:localhost}:${configserver.port:8888}/
+      fail-fast: true
+      retry:
+        multiplier: 1.2
+        initial-interval: 3000
+        max-attempts: 10
+        max-interval: 60000
   profiles:
-    active: default
+    active: native

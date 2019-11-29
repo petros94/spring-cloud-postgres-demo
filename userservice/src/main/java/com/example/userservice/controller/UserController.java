@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import java.util.*;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/users")
 public class UserController {
 
@@ -20,6 +19,7 @@ public class UserController {
 
     @GetMapping
     @ResponseBody
+    @CrossOrigin
     List<User> getAllUsers(@RequestParam(value = "email", required = false) String email){
         return Optional.ofNullable(email).isPresent() ?
                 Collections.singletonList(userService.findByEmail(email).orElseGet(User::new)) :
@@ -28,12 +28,14 @@ public class UserController {
 
     @GetMapping("/{id}")
     @ResponseBody
+    @CrossOrigin
     User getUserByEmail(@PathVariable UUID id){
         return userService.findById(id).orElseGet(User::new);
     }
 
     @PostMapping
     @ResponseBody
+    @CrossOrigin
     User saveUser(@Valid @RequestBody UserDTO user){
         return userService.save(user);
     }

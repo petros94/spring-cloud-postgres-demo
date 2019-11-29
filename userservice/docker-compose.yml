@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  userservice:
+    build: .
+    image: spring-cloud-postgres-demo/userservice:1
+    environment:
+      - EUREKA_HOST=eureka
+      - CONFIGSERVER_HOST=configserver
+      - POSTGRES_HOST=postgres
+
+networks:
+  default:
+    external:
+      name: spring-cloud-postgres-demo_default

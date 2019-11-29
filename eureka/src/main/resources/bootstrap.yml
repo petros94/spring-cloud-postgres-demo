@@ -1,6 +1,6 @@
 spring:
   application:
-    name: userservice
+    name: eureka
   cloud:
     config:
       uri: http://${configserver.host:localhost}:${configserver.port:8888}/

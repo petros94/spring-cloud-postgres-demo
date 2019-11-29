@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  postgres:
+    build: .
+    image: spring-cloud-postgres-demo/postgres-test:1
+    volumes:
+      - demo-db-data:/tmpfs/tmp
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432"
+
+volumes:
+  demo-db-data:
+
+networks:
+  default:
+    external:
+      name: spring-cloud-postgres-demo_default

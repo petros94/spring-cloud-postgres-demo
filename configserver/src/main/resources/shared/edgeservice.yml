@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: userservice
+          uri: lb://userservice
+          predicates:
+            - Path=/userservice/**
+          filters:
+            - StripPrefix=1
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: ["*"]
+            allowedMethods: ["POST","GET","OPTIONS"]
+            allowedHeaders: "*"
+            allowCredentials: true
+  zipkin:
+    base-url: http://${zipkin.host:localhost}:${zipkin.port:9411}/
+
+logging:
+  level:
+    de:
+      codecentric: DEBUG

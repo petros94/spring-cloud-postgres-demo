@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  edgeservice:
+    container_name: spring-cloud-postgres-demo_userservice_1
+    build: .
+    image: spring-cloud-postgres-demo/cloud-edgeservice:1
+    ports:
+      - "8080:8080"
+    environment:
+      - EUREKA_HOST=eureka
+      - ZIPKIN_HOST=zipkin
+      - CONFIGSERVER_HOST=configserver
+
+networks:
+  default:
+    external:
+      name: spring-cloud-postgres-demo_default

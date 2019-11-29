@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_BASE_URL: http://localhost:8080/userservice
+    image: spring-cloud-postgres-demo/ui:1
+    ports:
+      - "3000:80"
+    restart: always
+
+volumes:
+  demo-db-data:

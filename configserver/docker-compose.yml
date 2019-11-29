@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  configserver:
+    build: .
+    image: spring-cloud-postgres-demo/cloud-configserver:1
+    ports:
+      - "8888:8888"
+    environment:
+      - EUREKA_HOST=eureka
+      - ZIPKIN_HOST=zipkin
+      - CONFIGSERVER_HOST=configserver
+
+networks:
+  default:
+    external:
+      name: spring-cloud-postgres-demo_default

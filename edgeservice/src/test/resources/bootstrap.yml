@@ -1,10 +1,10 @@
 spring:
   application:
-    name: userservice
+    name: edgeservice
   cloud:
     config:
       uri: http://${configserver.host:localhost}:${configserver.port:8888}/
-      fail-fast: true
+      fail-fast: false
       retry:
         multiplier: 1.2
         initial-interval: 3000

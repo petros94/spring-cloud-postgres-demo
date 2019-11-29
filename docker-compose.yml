@@ -32,9 +32,35 @@ services:
       - eureka
   userservice:
     build: userservice/.
-    image: spring-cloud-postgres-demo/hellodocker:1
+    image: spring-cloud-postgres-demo/userservice:1
     environment:
       - EUREKA_HOST=eureka
       - CONFIGSERVER_HOST=configserver
+      - POSTGRES_HOST=postgres
     depends_on:
       - eureka
+      - postgres
+  postgres:
+    build: postgres/
+    image: spring-cloud-postgres-demo/postgres-test:1
+    volumes:
+      - demo-db-data:/tmpfs/tmp
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432"
+    depends_on:
+      - configserver
+  ui:
+    build:
+      context: ui
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_BASE_URL: http://localhost:8080/userservice
+    image: spring-cloud-postgres-demo/ui:1
+    ports:
+      - "3000:80"
+    restart: always
+
+volumes:
+  demo-db-data:
